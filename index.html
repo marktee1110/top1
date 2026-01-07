@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>الحسابات المساحية - المهندس عمار يوسف</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>الحسابات المساحية - المهندس عمار يوسف</header>
+
+<nav>
+  <button onclick="showPage(event,'home')" class="active">🏠</button>
+  <button onclick="showPage(event,'prog1')">📐</button>
+  <button onclick="showPage(event,'prog2')">📏</button>
+  <button onclick="showPage(event,'prog3')">💯</button>
+  <button onclick="showPage(event,'database')">📂</button>
+  <button onclick="showPage(event,'sessionsManager')">📑</button>
+  <button onclick="showPage(event,'searchPage')">🔎</button>
+  <button onclick="showPage(event,'help')">ℹ️</button>
+</nav>
+
+<!-- الصفحة الرئيسية -->
+<div id="home" class="page active">
+  <div class="grid">
+    <button class="big-btn" onclick="showPage(event,'prog1')">📐 حساب إحداثيات</button>
+    <button class="big-btn" onclick="showPage(event,'prog2')">📏 حساب زاوية/مسافة</button>
+    <button class="big-btn" onclick="showPage(event,'prog3')">💯 التحقيق</button>
+    <button class="big-btn" onclick="showPage(event,'database')">📂 إدارة قاعدة النقاط</button>
+    <button class="big-btn" onclick="showPage(event,'sessionsManager')">📑 إدارة الجلسات</button>
+    <button class="big-btn" onclick="showPage(event,'searchPage')">🔎 البحث العام</button>
+    <button class="big-btn" onclick="showPage(event,'help')">ℹ️ دليل المستخدم</button>
+  </div>
+</div>
+
+<!-- برنامج 1 -->
+<div id="prog1" class="page">
+  <div class="container">
+    <h2>📐 برنامج 1 — حساب الإحداثيات من زاوية + مسافة</h2>
+    <!-- محتوى برنامج 1 -->
+
+    <!-- زر خيارات متقدمة -->
+    <div class="dropdown">
+      <button class="btn ghost">⚙️ خيارات متقدمة</button>
+      <div class="dropdown-content">
+        <button class="btn ghost" onclick="exportOther(points,'prog1','pts')">تصدير PTS</button>
+        <button class="btn ghost" onclick="exportOther(points,'prog1','csv')">تصدير CSV</button>
+        <button class="btn ghost" onclick="exportOther(points,'prog1','kml')">تصدير KML</button>
+        <button class="btn ghost" onclick="exportOther(points,'prog1','gpx')">تصدير GPX</button>
+        <button class="btn ghost" onclick="exportOther(points,'prog1','dxf')">تصدير DXF</button>
+      </div>
+    </div>
+
+    <!-- زر تحويل وتصدير إلى العالمية -->
+    <button class="btn main" onclick="exportGlobal(points,'prog1')">🌐 تحويل وتصدير إلى العالمية</button>
+  </div>
+</div>
+
+<!-- برنامج 2 -->
+<div id="prog2" class="page">
+  <div class="container">
+    <h2>📏 برنامج 2 — حساب الزاوية والمسافة من إحداثيات</h2>
+    <!-- محتوى برنامج 2 -->
+
+    <!-- زر خيارات متقدمة -->
+    <div class="dropdown">
+      <button class="btn ghost">⚙️ خيارات متقدمة</button>
+      <div class="dropdown-content">
+        <button class="btn ghost" onclick="exportOther(points,'prog2','pts')">تصدير PTS</button>
+        <button class="btn ghost" onclick="exportOther(points,'prog2','csv')">تصدير CSV</button>
+        <button class="btn ghost" onclick="exportOther(points,'prog2','kml')">تصدير KML</button>
+        <button class="btn ghost" onclick="exportOther(points,'prog2','gpx')">تصدير GPX</button>
+        <button class="btn ghost" onclick="exportOther(points,'prog2','dxf')">تصدير DXF</button>
+      </div>
+    </div>
+
+    <!-- زر تحويل وتصدير إلى العالمية -->
+    <button class="btn main" onclick="exportGlobal(points,'prog2')">🌐 تحويل وتصدير إلى العالمية</button>
+  </div>
+</div>
+
+<!-- برنامج 3 -->
+<div id="prog3" class="page">
+  <div class="container">
+    <h2>💯 برنامج التحقيق — إحداثيات → زاوية فقط</h2>
+    <!-- محتوى برنامج 3 -->
+  </div>
+</div>
+
+<!-- صفحة إدارة قاعدة النقاط -->
+<div id="database" class="page">
+  <div class="container">
+    <h2>📂 قاعدة النقاط (موحّدة)</h2>
+    <!-- محتوى قاعدة النقاط -->
+  </div>
+</div>
+
+<!-- صفحة إدارة الجلسات -->
+<div id="sessionsManager" class="page">
+  <div class="container">
+    <h2>📑 إدارة الجلسات</h2>
+    <div style="margin:12px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <input id="searchSession" class="input" placeholder="🔍 بحث عن جلسة..." oninput="filterSessions()" />
+      <select id="filterProgram" class="input small" onchange="filterSessions()">
+        <option value="">كل البرامج</option>
+        <option value="prog1">برنامج 1</option>
+        <option value="prog2">برنامج 2</option>
+        <option value="prog3">برنامج التحقيق</option>
+      </select>
+      <select id="filterDate" class="input small" onchange="filterSessions()">
+        <option value="">كل الفترات</option>
+        <option value="today">اليوم</option>
+        <option value="week">هذا الأسبوع</option>
+        <option value="month">هذا الشهر</option>
+      </select>
+      <button class="btn main" onclick="newSession()">➕ جلسة جديدة</button>
+      <button class="btn ghost" onclick="exportAllSessions()">⬇️ تصدير الكل</button>
+      <button class="btn ghost" onclick="importSessions()">⬆️ استيراد</button>
+    </div>
+    <div class="card">
+      <div class="table-wrapper">
+        <table id="table_sessions">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>اسم الجلسة</th>
+              <th>البرنامج</th>
+              <th>التاريخ</th>
+              <th>عدد النقاط</th>
+              <th>تحكم</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div id="sessionDetails" class="card" style="margin-top:14px;display:none">
+      <h3>تفاصيل الجلسة</h3>
+      <p id="sessionInfo"></p>
+      <div id="sessionPoints"></div>
+      <button class="btn ghost" onclick="exportSession(currentSessionId)">⬇️ تصدير الجلسة</button>
+      <button class="btn ghost" onclick="editSessionPrompt()">📝 تعديل</button>
+      <button class="btn ghost" onclick="deleteSession(currentSessionId)">🗑 حذف</button>
+    </div>
+  </div>
+</div>
+
+<!-- صفحة البحث العام -->
+<div id="searchPage" class="page">
+  <div class="container">
+    <h2>🔎 البحث العام عن نقطة</h2>
+    <div style="margin-bottom:10px;display:flex;gap:8px;align-items:center">
+      <select id="searchType" class="input small" onchange="searchPoint()">
+        <option value="name">🔤 حسب الاسم</option>
+        <option value="x">📍 حسب قيمة X</option>
+        <option value="y">📍 حسب قيمة Y</option>
+      </select>
+      <input id="searchInput" class="input" placeholder="اكتب قيمة البحث..." oninput="searchPoint()" />
+      <button class="btn ghost" onclick="resetSearch()">🔄 مسح النتائج</button>
+    </div>
+    <div id="searchResults" class="card" style="margin-top:12px"></div>
+  </div>
+</div>
+
+<!-- صفحة المساعدة -->
+<div id="help" class="page">
+  <div class="container">
+    <h2>ℹ️ دليل المستخدم</h2>
+    <p>قاعدة النقاط موحّدة: أي نقطة تحفظها في أي برنامج تُضاف إلى القاعدة. عند الكتابة في أي حقل اسم نقطة، تظهر اقتراحات من كل النقاط المحفوظة ويمكنك اختيارها لملء الإحداثيات تلقائياً.</p>
+  </div>
+</div>
+
+<!-- ربط ملفات الجافاسكربت -->
+<script src="db.js"></script>
+<script src="suggestions.js"></script>
+<script src="sessions.js"></script>
+<script src="search.js"></script>
+<script src="prog1.js"></script>
+<script src="prog2.js"></script>
+<script src="prog3.js"></script>
+<script src="helpers.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<!-- إضافة ملف التصدير الجديد -->
+<script src="export.js"></script>
+
+</body>
+</html>
